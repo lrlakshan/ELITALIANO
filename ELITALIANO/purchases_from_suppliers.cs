@@ -10,19 +10,11 @@ using System.Windows.Forms;
 
 namespace ELITALIANO
 {
-    public partial class Form1 : Form
+    public partial class purchases_from_suppliers : Form
     {
-        public Form1()
+        public purchases_from_suppliers()
         {
             InitializeComponent();
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Admin_Login adminLogin = new Admin_Login();
-            adminLogin.Show();
         }
     }
 }
