@@ -103,6 +103,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "Admin_Login";
             this.Text = "Admin Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Admin_Login_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

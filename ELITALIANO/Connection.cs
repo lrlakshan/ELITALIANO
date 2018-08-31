@@ -8,7 +8,7 @@ namespace ELITALIANO
 {
     class Connection
     {
-        public static String myConnection = @"Data Source=localhost;port=3306;Initial Catalog=distribution;User Id=root;password=''";
+        public static String myConnection = @"Data Source=localhost;port=3306;Initial Catalog=distribution;User Id=root;password='';Convert Zero Datetime=True";
 
     }
 }

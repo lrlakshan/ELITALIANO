@@ -19,14 +19,85 @@ namespace ELITALIANO
 
         private void viewStocksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            view_stocks viewStocks = new view_stocks();
-            viewStocks.Show();
+
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "View Stocks")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                view_stocks viewStocks = new view_stocks();
+                viewStocks.Show();
+            }
+
         }
 
         private void purchasesFromSupplierToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            purchases_from_suppliers ps = new purchases_from_suppliers();
-            ps.Show();
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Purchases From Suppliers")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                purchases_from_suppliers ps = new purchases_from_suppliers();
+                ps.Show();
+            }
+           
+        }
+
+        private void admin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("Do you really want to close ELITALIANO program?", "Close", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.Yes)
+            {
+
+                Application.Exit();
+            }
+            else if (dialog == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void addNewItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Add/Remove/Change Items")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                add_new_items addNewItems = new add_new_items();
+                addNewItems.Show();
+            }
         }
     }
 }
