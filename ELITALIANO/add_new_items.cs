@@ -14,12 +14,14 @@ namespace ELITALIANO
     public partial class add_new_items : Form
     {
         DataTable dbDataSet;
+        bool isSelected = false;
         public add_new_items()
         {
             InitializeComponent();
             LoadTable();
+            
         }
-
+        //load table
         public void LoadTable()
         {
             try
@@ -46,7 +48,7 @@ namespace ELITALIANO
                 MessageBox.Show(ex.Message);
             }
         }
-
+        //add new itmes
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -114,15 +116,16 @@ namespace ELITALIANO
                 e.Handled = true;
             }
         }
-
+        //remove items
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "")
+                if (isSelected == false)
                 {
-                    MessageBox.Show("You have not selected the transaction you want to remove");
+                    MessageBox.Show("You have not selected the item you want to remove");
                 }
+                
                 else
                 {
                     DialogResult dialog = MessageBox.Show("Do you really want to delete this Item?", "Delete", MessageBoxButtons.YesNo);
@@ -154,30 +157,18 @@ namespace ELITALIANO
                 MessageBox.Show(ex.Message);
             }
             LoadTable();
-            
+            isSelected = false;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-
-                
-                textBox1.Text = row.Cells["Product ID"].Value.ToString();
-                textBox2.Text = row.Cells["Product Name"].Value.ToString(); ;
-                textBox3.Text = row.Cells["Purchase Price"].Value.ToString();
-                textBox4.Text = row.Cells["Selling Price"].Value.ToString();
-            }
-        }
-
+        
+        //change items
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "")
+                if (isSelected == false)
                 {
-                    MessageBox.Show("You have not selected the transaction you want to Change");
+                    MessageBox.Show("You have not selected the item you want to change");
                 }
                 else
                 {
@@ -210,6 +201,29 @@ namespace ELITALIANO
                 MessageBox.Show(ex.Message);
             }
             LoadTable();
+            isSelected = false;
+        }
+
+        //select from the grid
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+
+
+                textBox1.Text = row.Cells["Product ID"].Value.ToString();
+                textBox2.Text = row.Cells["Product Name"].Value.ToString(); ;
+                textBox3.Text = row.Cells["Purchase Price"].Value.ToString();
+                textBox4.Text = row.Cells["Selling Price"].Value.ToString();
+
+                isSelected = true;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
     

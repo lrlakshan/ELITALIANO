@@ -25,7 +25,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCommand = new MySqlCommand("select * from product", myConn);
+                MySqlCommand SelectCommand = new MySqlCommand("select productID as 'Product ID', productName as 'Product', purchasePrice as 'Purchase Price', sellingPrice as 'Selling Price', amountAvailable as 'Amount Available' from product", myConn);
 
                 MySqlDataAdapter sda = new MySqlDataAdapter();
                 sda.SelectCommand = SelectCommand;
@@ -50,7 +50,7 @@ namespace ELITALIANO
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             DataView DV = new DataView(dbDataSet);
-            DV.RowFilter = string.Format("productName LIKE '%{0}%'", textBox1.Text);
+            DV.RowFilter = string.Format("Product LIKE '%{0}%'", textBox1.Text);
             dataGridView1.DataSource = DV;
         }
     }

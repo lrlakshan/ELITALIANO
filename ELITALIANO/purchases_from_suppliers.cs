@@ -261,21 +261,7 @@ namespace ELITALIANO
             }
             
         }
-        //select item form the grid view
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.RowIndex >= 0)
-            {
-                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-
-                comboBox1.Text = row.Cells["Product Name"].Value.ToString();
-                label8.Text = row.Cells["Transaction"].Value.ToString();
-                textBox1.Text = row.Cells["Product ID"].Value.ToString();
-                textBox5.Text = row.Cells["Purchase Price"].Value.ToString();
-                textBox2.Text = "";
-                textBox3.Text = row.Cells["Purchased Amount"].Value.ToString();
-            }
-        }
+        
         //delete button
         private void button2_Click(object sender, EventArgs e)
         {
@@ -373,7 +359,7 @@ namespace ELITALIANO
                 e.Handled = true;
             }
         }
-
+        //Proceed button
         private void button4_Click(object sender, EventArgs e)
         {
             bool IsOpen = false;
@@ -433,6 +419,21 @@ namespace ELITALIANO
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+        //select item from the grid
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+
+                comboBox1.Text = row.Cells["Product Name"].Value.ToString();
+                label8.Text = row.Cells["Transaction"].Value.ToString();
+                textBox1.Text = row.Cells["Product ID"].Value.ToString();
+                textBox5.Text = row.Cells["Purchase Price"].Value.ToString();
+                textBox2.Text = "";
+                textBox3.Text = row.Cells["Purchased Amount"].Value.ToString();
             }
         }
     }
