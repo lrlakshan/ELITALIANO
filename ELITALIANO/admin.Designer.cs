@@ -34,12 +34,16 @@
             this.purchasesFromSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addExpensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expensesHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.payableHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.receivableHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashPaidToSuppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashReceivedFromSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.receivableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageReceivablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managePayablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +52,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inventoryToolStripMenuItem,
             this.expenseToolStripMenuItem,
-            this.accountsToolStripMenuItem});
+            this.accountsToolStripMenuItem,
+            this.receivableToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -88,10 +93,18 @@
             // 
             // expenseToolStripMenuItem
             // 
+            this.expenseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addExpensesToolStripMenuItem});
             this.expenseToolStripMenuItem.Name = "expenseToolStripMenuItem";
             this.expenseToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.expenseToolStripMenuItem.Text = "Expenses";
-            this.expenseToolStripMenuItem.Click += new System.EventHandler(this.expenseToolStripMenuItem_Click);
+            // 
+            // addExpensesToolStripMenuItem
+            // 
+            this.addExpensesToolStripMenuItem.Name = "addExpensesToolStripMenuItem";
+            this.addExpensesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addExpensesToolStripMenuItem.Text = "Add Expenses";
+            this.addExpensesToolStripMenuItem.Click += new System.EventHandler(this.addExpensesToolStripMenuItem_Click);
             // 
             // accountsToolStripMenuItem
             // 
@@ -99,8 +112,8 @@
             this.salesToolStripMenuItem,
             this.purchasesToolStripMenuItem,
             this.expensesHistoryToolStripMenuItem,
-            this.payableHistoryToolStripMenuItem,
-            this.receivableHistoryToolStripMenuItem});
+            this.cashPaidToSuppliersToolStripMenuItem,
+            this.cashReceivedFromSalesToolStripMenuItem});
             this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
             this.accountsToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.accountsToolStripMenuItem.Text = "Accounts";
@@ -108,33 +121,57 @@
             // salesToolStripMenuItem
             // 
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
-            this.salesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.salesToolStripMenuItem.Text = "Sales History";
             // 
             // purchasesToolStripMenuItem
             // 
             this.purchasesToolStripMenuItem.Name = "purchasesToolStripMenuItem";
-            this.purchasesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.purchasesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.purchasesToolStripMenuItem.Text = "Purchases History";
+            this.purchasesToolStripMenuItem.Click += new System.EventHandler(this.purchasesToolStripMenuItem_Click);
             // 
             // expensesHistoryToolStripMenuItem
             // 
             this.expensesHistoryToolStripMenuItem.Name = "expensesHistoryToolStripMenuItem";
-            this.expensesHistoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.expensesHistoryToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.expensesHistoryToolStripMenuItem.Text = "Expenses History";
             this.expensesHistoryToolStripMenuItem.Click += new System.EventHandler(this.expensesHistoryToolStripMenuItem_Click);
             // 
-            // payableHistoryToolStripMenuItem
+            // cashPaidToSuppliersToolStripMenuItem
             // 
-            this.payableHistoryToolStripMenuItem.Name = "payableHistoryToolStripMenuItem";
-            this.payableHistoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.payableHistoryToolStripMenuItem.Text = "Payable History";
+            this.cashPaidToSuppliersToolStripMenuItem.Name = "cashPaidToSuppliersToolStripMenuItem";
+            this.cashPaidToSuppliersToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.cashPaidToSuppliersToolStripMenuItem.Text = "Cash Paid to Suppliers";
+            this.cashPaidToSuppliersToolStripMenuItem.Click += new System.EventHandler(this.cashPaidToSuppliersToolStripMenuItem_Click);
             // 
-            // receivableHistoryToolStripMenuItem
+            // cashReceivedFromSalesToolStripMenuItem
             // 
-            this.receivableHistoryToolStripMenuItem.Name = "receivableHistoryToolStripMenuItem";
-            this.receivableHistoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.receivableHistoryToolStripMenuItem.Text = "Receivable History";
+            this.cashReceivedFromSalesToolStripMenuItem.Name = "cashReceivedFromSalesToolStripMenuItem";
+            this.cashReceivedFromSalesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.cashReceivedFromSalesToolStripMenuItem.Text = "Cash Received from Sales";
+            // 
+            // receivableToolStripMenuItem
+            // 
+            this.receivableToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageReceivablesToolStripMenuItem,
+            this.managePayablesToolStripMenuItem});
+            this.receivableToolStripMenuItem.Name = "receivableToolStripMenuItem";
+            this.receivableToolStripMenuItem.Size = new System.Drawing.Size(121, 20);
+            this.receivableToolStripMenuItem.Text = "Receivable/Payable";
+            // 
+            // manageReceivablesToolStripMenuItem
+            // 
+            this.manageReceivablesToolStripMenuItem.Name = "manageReceivablesToolStripMenuItem";
+            this.manageReceivablesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.manageReceivablesToolStripMenuItem.Text = "Manage Receivables";
+            // 
+            // managePayablesToolStripMenuItem
+            // 
+            this.managePayablesToolStripMenuItem.Name = "managePayablesToolStripMenuItem";
+            this.managePayablesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.managePayablesToolStripMenuItem.Text = "Manage Payables";
+            this.managePayablesToolStripMenuItem.Click += new System.EventHandler(this.managePayablesToolStripMenuItem_Click);
             // 
             // admin
             // 
@@ -165,7 +202,11 @@
         private System.Windows.Forms.ToolStripMenuItem salesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchasesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem expensesHistoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem payableHistoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem receivableHistoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem receivableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageReceivablesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem managePayablesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cashPaidToSuppliersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addExpensesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cashReceivedFromSalesToolStripMenuItem;
     }
 }

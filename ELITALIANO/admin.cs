@@ -100,27 +100,7 @@ namespace ELITALIANO
             }
         }
 
-        private void expenseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool IsOpen = false;
-
-
-            foreach (Form s in Application.OpenForms)
-            {
-                if (s.Text == "Expenses")
-                {
-                    IsOpen = true;
-                    s.BringToFront();
-                    break;
-                }
-            }
-
-            if (IsOpen == false)
-            {
-                expenses expenses = new expenses();
-                expenses.Show();
-            }
-        }
+    
 
         private void expensesHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -141,6 +121,94 @@ namespace ELITALIANO
             {
                 expenses_history expensesHistory = new expenses_history();
                 expensesHistory.Show();
+            }
+        }
+
+        private void purchasesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Purchases History")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                purchases_history purchasesHistory = new purchases_history();
+                purchasesHistory.Show();
+            }
+        }
+
+        private void managePayablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Manage Payables")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                manage_payables managePayables = new manage_payables();
+                managePayables.Show();
+            }
+        }
+
+        private void cashPaidToSuppliersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Cash Paid to Suppliers")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                cash_paid_to_suppliers cashPaidToSuppliers = new cash_paid_to_suppliers();
+                cashPaidToSuppliers.Show();
+            }
+        }
+
+        private void addExpensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Expenses")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                expenses expenses = new expenses();
+                expenses.Show();
             }
         }
     }

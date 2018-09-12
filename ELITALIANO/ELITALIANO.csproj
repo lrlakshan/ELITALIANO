@@ -79,6 +79,24 @@
     <Compile Include="admin.Designer.cs">
       <DependentUpon>admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="cash paid to suppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cash paid to suppliers.Designer.cs">
+      <DependentUpon>cash paid to suppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cashier login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cashier login.Designer.cs">
+      <DependentUpon>cashier login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cashier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cashier.Designer.cs">
+      <DependentUpon>cashier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Connection.cs" />
     <Compile Include="expenses.cs">
       <SubType>Form</SubType>
@@ -91,6 +109,12 @@
     </Compile>
     <Compile Include="expenses_history.Designer.cs">
       <DependentUpon>expenses_history.cs</DependentUpon>
+    </Compile>
+    <Compile Include="final bill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="final bill.Designer.cs">
+      <DependentUpon>final bill.cs</DependentUpon>
     </Compile>
     <Compile Include="final_invoice.cs">
       <SubType>Form</SubType>
@@ -105,6 +129,18 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Functions.cs" />
+    <Compile Include="invoice_history.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="invoice_history.Designer.cs">
+      <DependentUpon>invoice_history.cs</DependentUpon>
+    </Compile>
+    <Compile Include="manage payables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="manage payables.Designer.cs">
+      <DependentUpon>manage payables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="purchases_from_suppliers.cs">
@@ -112,6 +148,12 @@
     </Compile>
     <Compile Include="purchases_from_suppliers.Designer.cs">
       <DependentUpon>purchases_from_suppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="purchases_history.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="purchases_history.Designer.cs">
+      <DependentUpon>purchases_history.cs</DependentUpon>
     </Compile>
     <Compile Include="view_stocks.cs">
       <SubType>Form</SubType>
@@ -128,17 +170,35 @@
     <EmbeddedResource Include="admin.resx">
       <DependentUpon>admin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="cash paid to suppliers.resx">
+      <DependentUpon>cash paid to suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cashier login.resx">
+      <DependentUpon>cashier login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cashier.resx">
+      <DependentUpon>cashier.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="expenses.resx">
       <DependentUpon>expenses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="expenses_history.resx">
       <DependentUpon>expenses_history.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="final bill.resx">
+      <DependentUpon>final bill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="final_invoice.resx">
       <DependentUpon>final_invoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="invoice_history.resx">
+      <DependentUpon>invoice_history.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="manage payables.resx">
+      <DependentUpon>manage payables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -151,6 +211,9 @@
     </Compile>
     <EmbeddedResource Include="purchases_from_suppliers.resx">
       <DependentUpon>purchases_from_suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="purchases_history.resx">
+      <DependentUpon>purchases_history.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view_stocks.resx">
       <DependentUpon>view_stocks.cs</DependentUpon>

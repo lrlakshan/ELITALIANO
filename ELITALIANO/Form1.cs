@@ -38,5 +38,12 @@ namespace ELITALIANO
                 e.Cancel = true;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            cashier_login cashierLogin = new cashier_login();
+            cashierLogin.Show();
+        }
     }
 }
