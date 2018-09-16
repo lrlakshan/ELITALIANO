@@ -63,18 +63,18 @@ namespace ELITALIANO
             }
         }
 
-        private void Admin_Login_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DialogResult dialog = MessageBox.Show("Do you really want to close ELITALIANO program?", "Close", MessageBoxButtons.YesNo);
-            if (dialog == DialogResult.Yes)
-            {
+        //private void Admin_Login_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    DialogResult dialog = MessageBox.Show("Do you really want to close ELITALIANO program?", "Close", MessageBoxButtons.YesNo);
+        //    if (dialog == DialogResult.Yes)
+        //    {
 
-                Application.Exit();
-            }
-            else if (dialog == DialogResult.No)
-            {
-                e.Cancel = true;
-            }
-        }
+        //        Application.Exit();
+        //    }
+        //    else if (dialog == DialogResult.No)
+        //    {
+        //        e.Cancel = true;
+        //    }
+        //}
     }
 }

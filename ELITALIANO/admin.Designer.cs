@@ -46,9 +46,9 @@
             this.manageReceivablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.managePayablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashierLoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutFromAdminToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cashierLoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -199,6 +199,13 @@
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.logoutToolStripMenuItem.Text = "Cashier";
             // 
+            // cashierLoginToolStripMenuItem
+            // 
+            this.cashierLoginToolStripMenuItem.Name = "cashierLoginToolStripMenuItem";
+            this.cashierLoginToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.cashierLoginToolStripMenuItem.Text = "Cashier Login";
+            this.cashierLoginToolStripMenuItem.Click += new System.EventHandler(this.cashierLoginToolStripMenuItem_Click);
+            // 
             // logoutToolStripMenuItem1
             // 
             this.logoutToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -214,23 +221,16 @@
             this.logoutFromAdminToolStripMenuItem1.Text = "Logout from Admin";
             this.logoutFromAdminToolStripMenuItem1.Click += new System.EventHandler(this.logoutFromAdminToolStripMenuItem1_Click);
             // 
-            // cashierLoginToolStripMenuItem
-            // 
-            this.cashierLoginToolStripMenuItem.Name = "cashierLoginToolStripMenuItem";
-            this.cashierLoginToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.cashierLoginToolStripMenuItem.Text = "Cashier Login";
-            this.cashierLoginToolStripMenuItem.Click += new System.EventHandler(this.cashierLoginToolStripMenuItem_Click);
-            // 
             // admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "admin";
             this.Text = "admin";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.admin_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
