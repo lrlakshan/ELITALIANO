@@ -9,36 +9,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
 
-
 namespace ELITALIANO
 {
-    
-    public partial class final_invoice : Form
+    public partial class final_bill_for_admin_cashier : Form
     {
         DataTable dbDataSet;
 
-        public final_invoice()
+        public final_bill_for_admin_cashier()
         {
             InitializeComponent();
             LoadTable_after_proceed();
             LoadInvoiceNumber();
             Cal_total_amount();
             button1.Enabled = false;
-            
         }
-
-        
         public void LoadTable_after_proceed()
         {
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select pr.productName as 'Product Name',pr.purchasePrice as 'Unit Price',pu.amountPurchases as 'Qty',pu.amountPurchases*pr.purchasePrice as 'Value' from purchase pu inner join product pr ON pu.productID = pr.productID where pu.invoiceNum = (SELECT MAX(invoiceNum) from purchase) order by transactionNum ASC", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select pr.productName as 'Product Name',pr.sellingPrice as 'Unit Price',s.amount as 'Qty',s.amount*pr.sellingPrice as 'Value' from sales s inner join product pr ON s.productID = pr.productID where s.invoiceNum = (SELECT MAX(invoiceNum) from sales) order by transactionNum ASC", myConn);
 
                 MySqlDataAdapter sda = new MySqlDataAdapter();
                 sda.SelectCommand = SelectCom;
@@ -60,7 +54,7 @@ namespace ELITALIANO
             }
         }
 
-        
+
 
         //calculate the total bill
         public void Cal_total_amount()
@@ -68,7 +62,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(pu.amountPurchases*pr.purchasePrice) from purchase pu, product pr where pu.invoiceNum = '" + label7.Text + "' && pu.productID = pr.productID ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(s.amount*pr.sellingPrice) from sales s, product pr where s.invoiceNum = '" + label7.Text + "' && s.productID = pr.productID ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -76,7 +70,7 @@ namespace ELITALIANO
 
                 while (myReader.Read())
                 {
-                    Decimal s = myReader.GetDecimal("Sum(pu.amountPurchases*pr.purchasePrice)");
+                    Decimal s = myReader.GetDecimal("Sum(s.amount*pr.sellingPrice)");
                     String sTA = s.ToString();
 
 
@@ -98,7 +92,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Max(invoiceNum) from purchase ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Max(invoiceNum) from sales ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -124,7 +118,7 @@ namespace ELITALIANO
         {
             Decimal balance;
             //no cash paid no discount entered
-            if (textBox2.Text == "" && textBox4.Text =="")
+            if (textBox2.Text == "" && textBox4.Text == "")
             {
                 textBox3.Text = textBox1.Text;
                 label9.Text = "0.00";
@@ -134,7 +128,7 @@ namespace ELITALIANO
             else if (textBox2.Text != "" && textBox4.Text == "")
             {
                 balance = Decimal.Parse(textBox1.Text) - Decimal.Parse(textBox2.Text);
-                Decimal tempCash = Decimal.Parse(textBox1.Text) - Decimal.Parse(textBox1.Text) + Decimal.Parse(textBox2.Text) ;
+                Decimal tempCash = Decimal.Parse(textBox1.Text) - Decimal.Parse(textBox1.Text) + Decimal.Parse(textBox2.Text);
                 textBox3.Text = balance.ToString();
                 label9.Text = "0.00";
                 label10.Text = tempCash.ToString();
@@ -163,22 +157,18 @@ namespace ELITALIANO
 
         }
 
-        
-
-       
         //calculate button
         private void button3_Click(object sender, EventArgs e)
         {
             cal_balance();
             textBox2.Text = "";
             textBox4.Text = "";
-
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
-            if (!Char.IsDigit(ch) && ch != 8 && ch != 46 )
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
             {
                 e.Handled = true;
             }
@@ -203,7 +193,7 @@ namespace ELITALIANO
                 textBox3.Text = "";
                 textBox4.Text = "";
             }
-            
+
             else
             {
                 try
@@ -211,10 +201,10 @@ namespace ELITALIANO
                     DialogResult dialog = MessageBox.Show("Confirm the Payment?", "Payment Confirm", MessageBoxButtons.YesNo);
                     if (dialog == DialogResult.Yes)
                     {
-                        
+
                         MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                        MySqlCommand SelectCom = new MySqlCommand("insert into purchase_invoice  (invoiceNum,date,time,details,totalBill,discount,cashPaid,balance) values ('" + label7.Text + "','" + dateTimePicker1.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + richTextBox1.Text + "','" + textBox1.Text + "','" + label9.Text + "','" + label10.Text + "','" + textBox3.Text + "') ", myConn);
-                        MySqlCommand SelectCom1 = new MySqlCommand("insert into cash_paid_to_suppliers (invoiceNum,date,time,cashPaid) values ('" + label7.Text + "','" + dateTimePicker1.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + label10.Text + "')", myConn);
+                        MySqlCommand SelectCom = new MySqlCommand("insert into sales_invoice  (invoiceNum,date,time,details,totalBill,discount,cashPaid,balance) values ('" + label7.Text + "','" + dateTimePicker1.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + richTextBox1.Text + "','" + textBox1.Text + "','" + label9.Text + "','" + label10.Text + "','" + textBox3.Text + "') ", myConn);
+                        MySqlCommand SelectCom1 = new MySqlCommand("insert into cash_received_from_sales (invoiceNum,date,time,cashPaid) values ('" + label7.Text + "','" + dateTimePicker1.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + label10.Text + "')", myConn);
                         MySqlDataReader myReader;
                         MySqlDataReader myReader1;
 
@@ -226,20 +216,22 @@ namespace ELITALIANO
                             myConn.Open();
                             myReader1 = SelectCom1.ExecuteReader();
                         }
-                        
 
                         MessageBox.Show("Payment has been completed");
 
                         this.Close();
                         foreach (Form s in Application.OpenForms)
                         {
-                            if (s.Text == "Purchases From Suppliers")
+                            if (s.Text == "Admin Cashier")
                             {
 
                                 s.Close();
                                 break;
                             }
                         }
+
+                        cashier_from_admin c = new cashier_from_admin();
+                        c.Show();
                     }
                     else if (dialog == DialogResult.No)
                     {
@@ -255,7 +247,8 @@ namespace ELITALIANO
                 }
             }
         }
-        //close the final invoice form
+         //final bill close button
+
         private void button2_Click(object sender, EventArgs e)
         {
             try
@@ -264,7 +257,7 @@ namespace ELITALIANO
                 DialogResult dialog = MessageBox.Show("Do you want to exit without payment process", "Payment", MessageBoxButtons.YesNo);
                 if (dialog == DialogResult.Yes)
                 {
-                    
+
 
                     this.Close();
 
@@ -281,13 +274,39 @@ namespace ELITALIANO
             }
         }
 
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox2_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox4_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+        }
         DataTable MakeDataTable()
         {
 
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select pr.productName as 'Product Name',pr.purchasePrice as 'Unit Price',pu.amountPurchases as 'Qty',pu.amountPurchases*pr.purchasePrice as 'Value' from purchase pu inner join product pr ON pu.productID = pr.productID where pu.invoiceNum = (SELECT MAX(invoiceNum) from purchase) order by transactionNum ASC", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select pr.productName as 'Product Name',pr.sellingPrice as 'Unit Price',s.amount as 'Qty',s.amount*pr.sellingPrice as 'Value' from sales s inner join product pr ON s.productID = pr.productID where s.invoiceNum = (SELECT MAX(invoiceNum) from sales) order by transactionNum ASC", myConn);
 
                 MySqlDataAdapter sda = new MySqlDataAdapter();
                 sda.SelectCommand = SelectCom;
@@ -312,7 +331,7 @@ namespace ELITALIANO
             return dbDataSet;
         }
 
-        
+
         void ExportDataTableToPdf(DataTable dtblTable, String strPdfPath, string strHeader)
         {
 
@@ -351,7 +370,7 @@ namespace ELITALIANO
             //Author
             Paragraph prgAuthor = new Paragraph();
             prgAuthor.Alignment = Element.ALIGN_RIGHT;
-            prgAuthor.Add(new Chunk("Invoice Number : "+label7.Text, fntAuthor));
+            prgAuthor.Add(new Chunk("Invoice Number : " + label7.Text, fntAuthor));
             prgAuthor.Add(new Chunk("\nDate : " + dateTimePicker1.Text, fntAuthor));
             document.Add(prgAuthor);
 
@@ -382,7 +401,7 @@ namespace ELITALIANO
                 Paragraph aligmentTemp = new Paragraph();
                 aligmentTemp.Alignment = Element.ALIGN_RIGHT;
                 aligmentTemp.Add(new Chunk(dtblTable.Columns[i].ColumnName.ToUpper(), fntColumnHeader));
-                if(i == 0)
+                if (i == 0)
                 {
                     aligmentTemp.Alignment = Element.ALIGN_LEFT;
                 }
@@ -432,7 +451,7 @@ namespace ELITALIANO
 
                 table.AddCell(cell);
             }
-           //boarder bottom before subtotal
+            //boarder bottom before subtotal
             for (int i = 0; i < dtblTable.Columns.Count; i++)
             {
                 PdfPCell cell = new PdfPCell();
@@ -519,15 +538,15 @@ namespace ELITALIANO
 
             document.Add(table);
 
-            
-            
+
+
 
             document.Close();
             writer.Close();
             fs.Close();
         }
 
-        //create the pdf invoice
+        //create invoice button
         private void button4_Click(object sender, EventArgs e)
         {
             if (textBox3.Text == "")
@@ -548,9 +567,9 @@ namespace ELITALIANO
 
                     try
                     {
-                        
+
                         DataTable dtbl = MakeDataTable();
-                        ExportDataTableToPdf(dtbl, sv.FileName, "INVOICE");
+                        ExportDataTableToPdf(dtbl, sv.FileName, "RETAIL INVOICE");
 
 
                         System.Diagnostics.Process.Start(sv.FileName);
@@ -567,17 +586,6 @@ namespace ELITALIANO
                     }
 
                 }
-            }
-         
-
-        }
-
-        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char ch = e.KeyChar;
-            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
-            {
-                e.Handled = true;
             }
         }
 
@@ -599,8 +607,13 @@ namespace ELITALIANO
 
             }
         }
+
+        //calculate button
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            cal_balance();
+            textBox2.Text = "";
+            textBox4.Text = "";
+        }
     }
-
-
-   
 }

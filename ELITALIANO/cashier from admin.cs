@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace ELITALIANO
 {
-    public partial class cashier : Form
+    public partial class cashier_from_admin : Form
     {
         DataTable dbDataSet;
-        public cashier()
+        public cashier_from_admin()
         {
             InitializeComponent();
             LoadTable();
@@ -182,11 +182,6 @@ namespace ELITALIANO
 
             }
         }
-        //dropdown combo box
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         //add button
         private void button1_Click(object sender, EventArgs e)
@@ -229,6 +224,7 @@ namespace ELITALIANO
                 MessageBox.Show(ex.Message);
             }
         }
+
 
         //delete button
         private void button2_Click(object sender, EventArgs e)
@@ -343,20 +339,20 @@ namespace ELITALIANO
 
             if (IsOpen == false)
             {
-                final_bill fi = new final_bill();
+                final_bill_for_admin_cashier fi = new final_bill_for_admin_cashier();
                 fi.Owner = this;
                 fi.Show();
 
             }
         }
 
-        //disable the button until atleast one item is added
+        //hide proceed button until atleast one item added
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             button4.Enabled = !string.IsNullOrEmpty(textBox4.Text);
         }
 
-        //close the form
+        //close form
         private void button6_Click(object sender, EventArgs e)
         {
             try
@@ -373,7 +369,7 @@ namespace ELITALIANO
                     myReader = SelectCom.ExecuteReader();
 
                     this.Close();
-                    cashier c = new cashier();
+                    cashier_from_admin c = new cashier_from_admin();
                     c.Show();
 
                 }
@@ -405,7 +401,7 @@ namespace ELITALIANO
             }
         }
 
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void comboBox1_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -439,19 +435,37 @@ namespace ELITALIANO
             }
         }
 
-        private void logoutFromCashierToolStripMenuItem_Click(object sender, EventArgs e)
+        //form close
+        private void button5_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            try
+            {
 
-            cashier_login AL = new cashier_login();
-            AL.Show();
+                DialogResult dialog = MessageBox.Show("Do you really want to exit without proceeding?", "Exit", MessageBoxButtons.YesNo);
+                if (dialog == DialogResult.Yes)
+                {
+                    MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
+                    MySqlCommand SelectCom = new MySqlCommand("delete from sales where invoiceNum = '" + label7.Text + "'", myConn);
+                    MySqlDataReader myReader;
+
+                    myConn.Open();
+                    myReader = SelectCom.ExecuteReader();
+
+                    this.Close();
+                    
+
+                }
+                else if (dialog == DialogResult.No)
+                {
+
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-
-        private void cashier_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        
     }
 }

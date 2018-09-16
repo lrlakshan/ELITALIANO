@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace ELITALIANO
 {
-    public partial class cash_paid_to_suppliers : Form
+    public partial class cash_received_from_sales : Form
     {
         DataTable dbDataSet;
-        public cash_paid_to_suppliers()
+        public cash_received_from_sales()
         {
             InitializeComponent();
             LoadTable();
@@ -27,7 +27,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select invoiceNum as 'Invoice', date as 'Date(mm-dd-yyyy)',time as 'Time', cashPaid as 'Paid' from cash_paid_to_suppliers ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select invoiceNum as 'Invoice', date as 'Date(mm-dd-yyyy)',time as 'Time', cashPaid as 'Paid' from cash_received_from_sales ", myConn);
 
                 MySqlDataAdapter sda = new MySqlDataAdapter();
                 sda.SelectCommand = SelectCom;
@@ -55,7 +55,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select invoiceNum as 'Invoice', date as 'Date(mm-dd-yyyy)',time as 'Time', cashPaid as 'Paid' from cash_paid_to_suppliers  where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "'", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select invoiceNum as 'Invoice', date as 'Date(mm-dd-yyyy)',time as 'Time', cashPaid as 'Paid' from cash_received_from_sales  where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "'", myConn);
 
                 MySqlDataAdapter sda = new MySqlDataAdapter();
                 sda.SelectCommand = SelectCom;
@@ -82,7 +82,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(cashPaid) from cash_paid_to_suppliers ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(cashPaid) from cash_received_from_sales ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -112,7 +112,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(cashPaid) from cash_paid_to_suppliers where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(cashPaid) from cash_received_from_sales where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -136,19 +136,13 @@ namespace ELITALIANO
 
             }
         }
-    
 
-      
-
-        //search by date
+        //search bby date
         private void button1_Click(object sender, EventArgs e)
         {
             LoadTable_between_dates();
             cal_cash_Between_Dates();
-
         }
-
-       
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -162,7 +156,5 @@ namespace ELITALIANO
             LoadTable();
             cal_cash_all();
         }
-
-        
     }
 }

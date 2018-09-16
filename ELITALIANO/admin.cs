@@ -12,6 +12,7 @@ namespace ELITALIANO
 {
     public partial class admin : Form
     {
+
         public admin()
         {
             InitializeComponent();
@@ -209,6 +210,127 @@ namespace ELITALIANO
             {
                 expenses expenses = new expenses();
                 expenses.Show();
+            }
+        }
+
+        private void salesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Sales History")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                sales_history salesHistory = new sales_history();
+                salesHistory.Show();
+            }
+        }
+
+        private void cashReceivedFromSalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Cash Received from Sales")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                cash_received_from_sales cashReceivedFromSales = new cash_received_from_sales();
+                cashReceivedFromSales.Show();
+            }
+        }
+
+        private void manageReceivablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Manage Receivables")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                manage_receivables manageReceivables = new manage_receivables();
+                manageReceivables.Show();
+            }
+        }
+
+        private void summaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Summary")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                summary Summary = new summary();
+                Summary.Show();
+            }
+        }
+
+        
+
+        private void logoutFromAdminToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Admin_Login AL = new Admin_Login();
+            AL.Show();
+        }
+
+        private void cashierLoginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            bool IsOpen = false;
+
+
+            foreach (Form s in Application.OpenForms)
+            {
+                if (s.Text == "Admin Cashier")
+                {
+                    IsOpen = true;
+                    s.BringToFront();
+                    break;
+                }
+            }
+
+            if (IsOpen == false)
+            {
+                cashier_from_admin c = new cashier_from_admin();
+                c.Show();
             }
         }
     }

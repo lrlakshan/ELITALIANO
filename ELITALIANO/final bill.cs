@@ -211,8 +211,11 @@ namespace ELITALIANO
                         myConn.Open();
                         myReader = SelectCom.ExecuteReader();
                         myConn.Close();
-                        myConn.Open();
-                        myReader1 = SelectCom1.ExecuteReader();
+                        if (label10.Text != "0.00")
+                        {
+                            myConn.Open();
+                            myReader1 = SelectCom1.ExecuteReader();
+                        }
 
                         MessageBox.Show("Payment has been completed");
 
@@ -567,6 +570,25 @@ namespace ELITALIANO
                     }
 
                 }
+            }
+        }
+
+        //dont need invoice button
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (textBox3.Text == "")
+            {
+                MessageBox.Show("You have not calculated the balance");
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox4.Text = "";
+                label10.Text = "";
+                label9.Text = "";
+            }
+            else
+            {
+                button1.Enabled = true;
+
             }
         }
     }

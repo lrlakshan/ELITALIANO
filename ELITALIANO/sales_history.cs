@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace ELITALIANO
 {
-    public partial class manage_payables : Form
+    public partial class sales_history : Form
     {
         DataTable dbDataSet;
         public static string parsingString;
         bool isSeleceted;
-        public manage_payables()
+        public sales_history()
         {
             InitializeComponent();
             LoadTable();
@@ -28,15 +28,14 @@ namespace ELITALIANO
             groupBox1.Visible = false;
             groupBox2.Visible = false;
             isSeleceted = false;
-            buttonDisable();
         }
-        //load table
+
         public void LoadTable()
         {
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select invoiceNum as 'Invoice', date as 'Date(mm-dd-yyyy)',time as 'Time',details as 'Details',totalBill as 'Bill',discount as 'Discount', cashPaid as 'Paid', balance as 'Balance' from purchase_invoice ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select invoiceNum as 'Invoice', date as 'Date(mm-dd-yyyy)',time as 'Time',details as 'Details',totalBill as 'Bill',discount as 'Discount', cashPaid as 'Paid', balance as 'Balance' from sales_invoice ", myConn);
 
                 MySqlDataAdapter sda = new MySqlDataAdapter();
                 sda.SelectCommand = SelectCom;
@@ -64,7 +63,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select invoiceNum as 'Invoice', date as 'Date(mm-dd-yyyy)',time as 'Time',details as 'Details',totalBill as 'Bill',discount as 'Discount', cashPaid as 'Paid', balance as 'Balance' from purchase_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "'", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select invoiceNum as 'Invoice', date as 'Date(mm-dd-yyyy)',time as 'Time',details as 'Details',totalBill as 'Bill',discount as 'Discount', cashPaid as 'Paid', balance as 'Balance' from sales_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "'", myConn);
 
                 MySqlDataAdapter sda = new MySqlDataAdapter();
                 sda.SelectCommand = SelectCom;
@@ -91,7 +90,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(totalBill) from purchase_invoice ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(totalBill) from sales_invoice ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -122,7 +121,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(discount) from purchase_invoice ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(discount) from sales_invoice ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -153,7 +152,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(cashPaid) from purchase_invoice ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(cashPaid) from sales_invoice ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -184,7 +183,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(balance) from purchase_invoice ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(balance) from sales_invoice ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -215,7 +214,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(totalBill) from purchase_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(totalBill) from sales_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -246,7 +245,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(discount) from purchase_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(discount) from sales_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -277,7 +276,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(cashPaid) from purchase_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(cashPaid) from sales_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -308,7 +307,7 @@ namespace ELITALIANO
             try
             {
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                MySqlCommand SelectCom = new MySqlCommand("select Sum(balance) from purchase_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
+                MySqlCommand SelectCom = new MySqlCommand("select Sum(balance) from sales_invoice where date between '" + dateTimePicker1.Text + "' and '" + dateTimePicker2.Text + "' ", myConn);
                 MySqlDataReader myReader;
 
                 myConn.Open();
@@ -333,54 +332,6 @@ namespace ELITALIANO
             }
         }
 
-        //Additional discount calculation function
-        void newDiscount_cal()
-        {
-            try
-            {
-                Decimal newDiscount = Convert.ToDecimal(textBox6.Text);
-                Decimal oldDiscount = Convert.ToDecimal(textBox3.Text);
-                Decimal finalDiscount = newDiscount + oldDiscount;
-                textBox3.Text = finalDiscount.ToString();
-                Decimal newBalance = Convert.ToDecimal(textBox2.Text) - finalDiscount - Convert.ToDecimal(textBox4.Text);
-                textBox5.Text = newBalance.ToString();
-                //textBox6.Text = "";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        //Additional payment calculation function
-        void newPayment_cal()
-        {
-            try
-            {
-                Decimal newPayment = Convert.ToDecimal(textBox7.Text);
-                Decimal oldPayment = Convert.ToDecimal(textBox4.Text);
-                Decimal finalPayment = newPayment + oldPayment;
-                textBox4.Text = finalPayment.ToString();
-                Decimal newBalance = Convert.ToDecimal(textBox2.Text) - finalPayment - Convert.ToDecimal(textBox3.Text);
-                textBox5.Text = newBalance.ToString();
-                //textBox7.Text = "";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        //button disable function
-        void buttonDisable()
-        {
-            textBox6.Enabled = false;
-            textBox7.Enabled = false;
-            button5.Enabled = false;
-            button6.Enabled = false;
-            button3.Enabled = false;
-        }
-
         void FillCombo()
         {
             comboBox1.Items.Add("Date");
@@ -394,18 +345,12 @@ namespace ELITALIANO
                 groupBox1.Visible = true;
                 groupBox2.Visible = false;
                 isSeleceted = false;
-                textBox6.Text = "";
-                textBox7.Text = "";
-                buttonDisable();
             }
             if (comboBox1.Text == "Details")
             {
                 groupBox2.Visible = true;
                 groupBox1.Visible = false;
                 isSeleceted = false;
-                textBox6.Text = "";
-                textBox7.Text = "";
-                buttonDisable();
             }
         }
 
@@ -418,13 +363,10 @@ namespace ELITALIANO
             cal_cash_Between_Dates();
             cal_balance_Between_Dates();
             isSeleceted = false;
-            buttonDisable();
-            textBox6.Text = "";
-            textBox7.Text = "";
         }
 
-        //view all in view by detail
-        private void button4_Click(object sender, EventArgs e)
+        //view all in view by date
+        private void button2_Click(object sender, EventArgs e)
         {
             LoadTable();
             cal_total_all();
@@ -432,9 +374,6 @@ namespace ELITALIANO
             cal_cash_all();
             cal_balance_all();
             isSeleceted = false;
-            buttonDisable();
-            textBox6.Text = "";
-            textBox7.Text = "";
         }
 
         //search bar
@@ -463,10 +402,39 @@ namespace ELITALIANO
                 textBox4.Text = cash;
                 textBox5.Text = balance;
             }
-            buttonDisable();
         }
 
-        //select from grid
+        //open invoice
+        private void button3_Click(object sender, EventArgs e)
+        {
+            bool IsOpen = false;
+
+            if (isSeleceted == false)
+            {
+                MessageBox.Show("You have not selected the invoice you want to view");
+            }
+            else
+            {
+                foreach (Form s in Application.OpenForms)
+                {
+                    if (s.Text == "Bill History")
+                    {
+                        IsOpen = true;
+                        s.BringToFront();
+                        break;
+                    }
+                }
+
+                if (IsOpen == false)
+                {
+                    parsingString = label8.Text;
+                    bill_history bh = new bill_history();
+                    bh.Show();
+                }
+            }
+        }
+
+        //cell click
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -479,16 +447,11 @@ namespace ELITALIANO
                 textBox4.Text = row.Cells["Paid"].Value.ToString();
                 textBox5.Text = row.Cells["Balance"].Value.ToString();
                 isSeleceted = true;
-                textBox6.Enabled = true;
-                textBox7.Enabled = true;
-                button5.Enabled = true;
-                button6.Enabled = true;
-                button3.Enabled = true;
             }
         }
 
-        //view all view by date
-        private void button2_Click(object sender, EventArgs e)
+        //view all in view by details
+        private void button4_Click(object sender, EventArgs e)
         {
             LoadTable();
             cal_total_all();
@@ -496,111 +459,6 @@ namespace ELITALIANO
             cal_cash_all();
             cal_balance_all();
             isSeleceted = false;
-            buttonDisable();
-            textBox6.Text = "";
-            textBox7.Text = "";
-        }
-
-        //additional discount add button
-        private void button5_Click(object sender, EventArgs e)
-        {
-            newDiscount_cal();
-            textBox6.Enabled = false;
-            button5.Enabled = false;
-        }
-
-        //additional payment button
-        private void button6_Click(object sender, EventArgs e)
-        {
-            newPayment_cal();
-            textBox7.Enabled = false;
-            button6.Enabled = false;
-        }
-
-        private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char ch = e.KeyChar;
-            if (!Char.IsDigit(ch) && ch != 8 && ch != 46 && ch != '-')
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char ch = e.KeyChar;
-            if (!Char.IsDigit(ch) && ch != 8 && ch != 46 && ch != '-')
-            {
-                e.Handled = true;
-            }
-        }
-
-        //save button
-        private void button3_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DialogResult dialog = MessageBox.Show("Are you Sure?", "Save", MessageBoxButtons.YesNo);
-                if (dialog == DialogResult.Yes)
-                {
-                    MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                    MySqlCommand SelectCom = new MySqlCommand("update purchase_invoice set discount = '" + this.textBox3.Text + "',cashPaid = '" + this.textBox4.Text + "',balance = '" + this.textBox5.Text + "' where invoiceNum = '" + this.label8.Text + "';", myConn);
-                    MySqlCommand SelectCom1 = new MySqlCommand("insert into cash_paid_to_suppliers (invoiceNum,date,time,cashPaid) values ('"+label8.Text+ "','" + dateTimePicker3.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + textBox7.Text + "')", myConn);
-                    MySqlDataReader myReader;
-                    MySqlDataReader myReader1;
-
-                    myConn.Open();
-                    myReader = SelectCom.ExecuteReader();
-                    myConn.Close();
-                    myConn.Open();
-                    if (textBox7.Text !="")
-                    {
-                        myReader1 = SelectCom1.ExecuteReader();
-
-                    }
-                    MessageBox.Show("Changes Saved Succesfully");
-                    LoadTable();
-                    textBox6.Text = "";
-                    textBox7.Text = "";
-
-                }
-                else if (dialog == DialogResult.No)
-                {
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        //close button
-        private void button7_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                DialogResult dialog = MessageBox.Show("Do you really want to exit?", "Exit", MessageBoxButtons.YesNo);
-                if (dialog == DialogResult.Yes)
-                {
-                   
-
-                    this.Close();
-
-                }
-                else if (dialog == DialogResult.No)
-                {
-
-                }
-
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
     }
 }
