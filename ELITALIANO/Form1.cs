@@ -25,6 +25,15 @@ namespace ELITALIANO
             adminLogin.Show();
         }
 
+       
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            cashier_login cashierLogin = new cashier_login();
+            cashierLogin.Show();
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult dialog = MessageBox.Show("Do you really want to close ELITALIANO program?", "Close", MessageBoxButtons.YesNo);
@@ -37,13 +46,6 @@ namespace ELITALIANO
             {
                 e.Cancel = true;
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            cashier_login cashierLogin = new cashier_login();
-            cashierLogin.Show();
         }
     }
 }
