@@ -561,7 +561,7 @@ namespace ELITALIANO
             else
             {
                 SaveFileDialog sv = new SaveFileDialog();
-                sv.FileName = label7.Text + ".pdf";
+                sv.FileName = label7.Text + " " + richTextBox1.Text +".pdf";
                 if (sv.ShowDialog() == DialogResult.OK)
                 {
 
