@@ -15,6 +15,7 @@ namespace ELITALIANO
     {
         DataTable dbDataSet;
         final_invoice f;
+        public static string parsingString;
 
         public purchases_from_suppliers()
         {
@@ -377,6 +378,7 @@ namespace ELITALIANO
 
             if (IsOpen == false)
             {
+                parsingString = dateTimePicker1.Text;
                 final_invoice fi = new final_invoice();
                 fi.Owner = this;
                 fi.Show();

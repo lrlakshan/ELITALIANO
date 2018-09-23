@@ -37,6 +37,7 @@ namespace ELITALIANO
         {
             try
             {
+                label1.Text = purchases_from_suppliers.parsingString;
                 MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
                 MySqlCommand SelectCom = new MySqlCommand("select pr.productName as 'Product Name',pr.purchasePrice as 'Unit Price',pu.amountPurchases as 'Qty',pu.amountPurchases*pr.purchasePrice as 'Value' from purchase pu inner join product pr ON pu.productID = pr.productID where pu.invoiceNum = (SELECT MAX(invoiceNum) from purchase) order by transactionNum ASC", myConn);
 
@@ -213,8 +214,8 @@ namespace ELITALIANO
                     {
                         
                         MySqlConnection myConn = new MySqlConnection(Connection.myConnection);
-                        MySqlCommand SelectCom = new MySqlCommand("insert into purchase_invoice  (invoiceNum,date,time,details,totalBill,discount,cashPaid,balance) values ('" + label7.Text + "','" + dateTimePicker1.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + richTextBox1.Text + "','" + textBox1.Text + "','" + label9.Text + "','" + label10.Text + "','" + textBox3.Text + "') ", myConn);
-                        MySqlCommand SelectCom1 = new MySqlCommand("insert into cash_paid_to_suppliers (invoiceNum,date,time,cashPaid) values ('" + label7.Text + "','" + dateTimePicker1.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + label10.Text + "')", myConn);
+                        MySqlCommand SelectCom = new MySqlCommand("insert into purchase_invoice  (invoiceNum,date,time,details,totalBill,discount,cashPaid,balance) values ('" + label7.Text + "','" + label1.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + richTextBox1.Text + "','" + textBox1.Text + "','" + label9.Text + "','" + label10.Text + "','" + textBox3.Text + "') ", myConn);
+                        MySqlCommand SelectCom1 = new MySqlCommand("insert into cash_paid_to_suppliers (invoiceNum,date,time,cashPaid) values ('" + label7.Text + "','" + label1.Text + "','" + DateTime.Now.ToLongTimeString() + "','" + label10.Text + "')", myConn);
                         MySqlDataReader myReader;
                         MySqlDataReader myReader1;
 
@@ -352,7 +353,7 @@ namespace ELITALIANO
             Paragraph prgAuthor = new Paragraph();
             prgAuthor.Alignment = Element.ALIGN_RIGHT;
             prgAuthor.Add(new Chunk("Invoice Number : "+label7.Text, fntAuthor));
-            prgAuthor.Add(new Chunk("\nDate : " + dateTimePicker1.Text, fntAuthor));
+            prgAuthor.Add(new Chunk("\nDate : " + label1.Text, fntAuthor));
             document.Add(prgAuthor);
 
             //Add a line seperation
@@ -598,6 +599,11 @@ namespace ELITALIANO
                 button1.Enabled = true;
 
             }
+        }
+
+        private void final_invoice_Load(object sender, EventArgs e)
+        {
+            label1.Text = purchases_from_suppliers.parsingString;
         }
     }
 

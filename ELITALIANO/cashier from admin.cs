@@ -14,6 +14,7 @@ namespace ELITALIANO
     public partial class cashier_from_admin : Form
     {
         DataTable dbDataSet;
+        public static string parsingString;
         public cashier_from_admin()
         {
             InitializeComponent();
@@ -339,6 +340,7 @@ namespace ELITALIANO
 
             if (IsOpen == false)
             {
+                parsingString = dateTimePicker1.Text;
                 final_bill_for_admin_cashier fi = new final_bill_for_admin_cashier();
                 fi.Owner = this;
                 fi.Show();
